@@ -9,11 +9,44 @@
 #import "AppDelegate.h"
 
 @implementation AppDelegate
+@synthesize window, tabBarController, waveViewController, fwUpdateViewController, infoViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
+    
+    // instantiate the view controllers:
+    self.waveViewController = [[WaveViewController alloc] initWithNibName:nil bundle:nil];
+    self.fwUpdateViewController = [[FwUpdateViewController alloc] initWithNibName:nil bundle:nil];
+    self.infoViewController = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
+    // a nib name of nil (meaning to use the .xib file we created for each controller), and a bundle of nil (meaning to use this application’s bundle)
+    
+    
+    // set the titles for the view controllers:
+    self.waveViewController.title = @"Wave";
+    self.fwUpdateViewController.title = @"Update";
+    self.infoViewController.title = @"Info";
+    
+    // set the images to appear in the tab bar:
+    self.waveViewController.tabBarItem.image = [UIImage imageNamed:@"iconHeart.png"];
+    self.fwUpdateViewController.tabBarItem.image = [UIImage imageNamed:@"iconFwUpdate.png"];
+    self.infoViewController.tabBarItem.image = [UIImage imageNamed:@"iconInfo.png"];
+    
+    // instantiate the tab bar controller:
+    self.tabBarController = [[UITabBarController alloc] init];
+    
+    // set the tab bar’s view controllers array:
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                             self.waveViewController,
+                                             self.fwUpdateViewController,
+                                             self.infoViewController,
+                                             nil];
+    
+    // add the tab bar to the application window as a subview:
+    [self.window addSubview:self.tabBarController.view];
+    
+    
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

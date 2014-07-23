@@ -7,9 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WaveViewController.h"
+#import "FwUpdateViewController.h"
+#import "InfoViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UITabBarController *tabBarController;
+@property (strong, nonatomic) WaveViewController *waveViewController;
+@property (strong, nonatomic) FwUpdateViewController *fwUpdateViewController;
+@property (strong, nonatomic) InfoViewController *infoViewController;
+
 
 @end

@@ -19,6 +19,12 @@
 		D2F5EA12197E5928005E94B9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2F5E9FA197E5928005E94B9 /* UIKit.framework */; };
 		D2F5EA1A197E5928005E94B9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA18197E5928005E94B9 /* InfoPlist.strings */; };
 		D2F5EA1C197E5928005E94B9 /* bOMDIC_AlphaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA1B197E5928005E94B9 /* bOMDIC_AlphaTests.m */; };
+		D2F5EA28197E5971005E94B9 /* WaveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA26197E5971005E94B9 /* WaveViewController.m */; };
+		D2F5EA29197E5971005E94B9 /* WaveViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA27197E5971005E94B9 /* WaveViewController.xib */; };
+		D2F5EA2D197E59BE005E94B9 /* FwUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA2B197E59BE005E94B9 /* FwUpdateViewController.m */; };
+		D2F5EA2E197E59BE005E94B9 /* FwUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA2C197E59BE005E94B9 /* FwUpdateViewController.xib */; };
+		D2F5EA32197E81F8005E94B9 /* InfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA30197E81F8005E94B9 /* InfoViewController.m */; };
+		D2F5EA33197E81F8005E94B9 /* InfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA31197E81F8005E94B9 /* InfoViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +54,15 @@
 		D2F5EA17197E5928005E94B9 /* bOMDIC AlphaTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "bOMDIC AlphaTests-Info.plist"; sourceTree = "<group>"; };
 		D2F5EA19197E5928005E94B9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D2F5EA1B197E5928005E94B9 /* bOMDIC_AlphaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bOMDIC_AlphaTests.m; sourceTree = "<group>"; };
+		D2F5EA25197E5971005E94B9 /* WaveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaveViewController.h; sourceTree = "<group>"; };
+		D2F5EA26197E5971005E94B9 /* WaveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaveViewController.m; sourceTree = "<group>"; };
+		D2F5EA27197E5971005E94B9 /* WaveViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WaveViewController.xib; sourceTree = "<group>"; };
+		D2F5EA2A197E59BE005E94B9 /* FwUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FwUpdateViewController.h; sourceTree = "<group>"; };
+		D2F5EA2B197E59BE005E94B9 /* FwUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FwUpdateViewController.m; sourceTree = "<group>"; };
+		D2F5EA2C197E59BE005E94B9 /* FwUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FwUpdateViewController.xib; sourceTree = "<group>"; };
+		D2F5EA2F197E81F8005E94B9 /* InfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoViewController.h; sourceTree = "<group>"; };
+		D2F5EA30197E81F8005E94B9 /* InfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoViewController.m; sourceTree = "<group>"; };
+		D2F5EA31197E81F8005E94B9 /* InfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +124,15 @@
 			children = (
 				D2F5EA05197E5928005E94B9 /* AppDelegate.h */,
 				D2F5EA06197E5928005E94B9 /* AppDelegate.m */,
+				D2F5EA25197E5971005E94B9 /* WaveViewController.h */,
+				D2F5EA26197E5971005E94B9 /* WaveViewController.m */,
+				D2F5EA27197E5971005E94B9 /* WaveViewController.xib */,
+				D2F5EA2A197E59BE005E94B9 /* FwUpdateViewController.h */,
+				D2F5EA2B197E59BE005E94B9 /* FwUpdateViewController.m */,
+				D2F5EA2C197E59BE005E94B9 /* FwUpdateViewController.xib */,
+				D2F5EA2F197E81F8005E94B9 /* InfoViewController.h */,
+				D2F5EA30197E81F8005E94B9 /* InfoViewController.m */,
+				D2F5EA31197E81F8005E94B9 /* InfoViewController.xib */,
 				D2F5EA08197E5928005E94B9 /* Images.xcassets */,
 				D2F5E9FD197E5928005E94B9 /* Supporting Files */,
 			);
@@ -220,6 +244,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D2F5EA01197E5928005E94B9 /* InfoPlist.strings in Resources */,
+				D2F5EA29197E5971005E94B9 /* WaveViewController.xib in Resources */,
+				D2F5EA2E197E59BE005E94B9 /* FwUpdateViewController.xib in Resources */,
+				D2F5EA33197E81F8005E94B9 /* InfoViewController.xib in Resources */,
 				D2F5EA09197E5928005E94B9 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -239,7 +266,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F5EA28197E5971005E94B9 /* WaveViewController.m in Sources */,
 				D2F5EA07197E5928005E94B9 /* AppDelegate.m in Sources */,
+				D2F5EA2D197E59BE005E94B9 /* FwUpdateViewController.m in Sources */,
+				D2F5EA32197E81F8005E94B9 /* InfoViewController.m in Sources */,
 				D2F5EA03197E5928005E94B9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,6 +391,7 @@
 				GCC_PREFIX_HEADER = "bOMDIC Alpha/bOMDIC Alpha-Prefix.pch";
 				INFOPLIST_FILE = "bOMDIC Alpha/bOMDIC Alpha-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "123D74A4-B87B-40CF-8AE1-8682AD96E16A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -374,6 +405,7 @@
 				GCC_PREFIX_HEADER = "bOMDIC Alpha/bOMDIC Alpha-Prefix.pch";
 				INFOPLIST_FILE = "bOMDIC Alpha/bOMDIC Alpha-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "123D74A4-B87B-40CF-8AE1-8682AD96E16A";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
