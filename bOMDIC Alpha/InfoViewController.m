@@ -34,6 +34,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 
+    _appVerLabel.text = [NSString stringWithFormat:@"%@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"]];
+
     Peripheral *sharedPeripheral = [Peripheral sharedPeripheral];
     _fwVerInSensorLabel.text = sharedPeripheral.deviceFirmwareRevision;
     _manufactureNameLabel.text = sharedPeripheral.deviceManufactureName;
