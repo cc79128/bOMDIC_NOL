@@ -7,6 +7,7 @@
 //
 
 #import "WaveViewController.h"
+#import "Peripheral.h"
 
 @interface WaveViewController ()
 
@@ -35,4 +36,20 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)testAction:(id)sender {
+    
+    // 連接裝置
+    [[Peripheral sharedPeripheral] discoverPheriphral:^(BOOL isConnect) {
+        
+        if (isConnect) {
+            NSLog(@"Connect to Device, HR = %@",[ [Peripheral sharedPeripheral] heartRate]);
+        }
+        else{
+            NSLog(@" Connect to Device Fail!!!!");
+        }
+        
+        
+    }];
+
+}
 @end

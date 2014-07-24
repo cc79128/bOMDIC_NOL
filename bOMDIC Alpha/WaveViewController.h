@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface WaveViewController : UIViewController
+- (IBAction)testAction:(id)sender;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Peripheral.h"
 
 @implementation AppDelegate
 @synthesize window, tabBarController, waveViewController, fwUpdateViewController, infoViewController;
@@ -46,6 +47,18 @@
     // add the tab bar to the application window as a subview:
     [self.window addSubview:self.tabBarController.view];
     
+    // 連接裝置
+    [[Peripheral sharedPeripheral] discoverPheriphral:^(BOOL isConnect) {
+        
+        if (isConnect) {
+            NSLog(@"Connect to Device, HR = %@",[ [Peripheral sharedPeripheral] heartRate]);
+        }
+        else{
+            NSLog(@" Connect to Device Fail!!!!");
+        }
+        
+        
+    }];
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
