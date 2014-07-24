@@ -7,6 +7,7 @@
 //
 
 #import "InfoViewController.h"
+#import "Peripheral.h"
 
 @interface InfoViewController ()
 
@@ -27,6 +28,20 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+
+    Peripheral *sharedPeripheral = [Peripheral sharedPeripheral];
+    _fwVerInSensorLabel.text = sharedPeripheral.deviceFirmwareRevision;
+    _manufactureNameLabel.text = sharedPeripheral.deviceManufactureName;
+    _modelNumberLabel.text = sharedPeripheral.deviceModelNumber;
+    _serialNumberLabel.text = sharedPeripheral.deviceSerialNumber;
+    _hardwareVerLabel.text = sharedPeripheral.deviceHardwareRevision;
+    _softwareVerLabel.text = sharedPeripheral.deviceSoftwareRevision;
+
 }
 
 - (void)didReceiveMemoryWarning

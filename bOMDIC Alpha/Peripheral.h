@@ -61,6 +61,7 @@
 @property (readonly, nonatomic) NSInteger isECGDisplayOpen;
 @property (readonly, nonatomic) BOOL signalQuality;
 @property (readonly, nonatomic) NSInteger ecgZoom;
+@property (readonly, nonatomic) NSInteger rxEcgZoom;
 @property NSInteger EAEDtenMsTicks;
 @property (nonatomic) NSTimer  *EAEDCheckTimer;
 @property (readonly, nonatomic) NSInteger levelOfStamina;

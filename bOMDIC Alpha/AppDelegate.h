@@ -10,6 +10,7 @@
 #import "WaveViewController.h"
 #import "FwUpdateViewController.h"
 #import "InfoViewController.h"
+#import "LiveMonitorVC.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -18,6 +19,6 @@
 @property (strong, nonatomic) WaveViewController *waveViewController;
 @property (strong, nonatomic) FwUpdateViewController *fwUpdateViewController;
 @property (strong, nonatomic) InfoViewController *infoViewController;
-
+@property (strong, nonatomic) LiveMonitorVC *liveMonitorVC;
 
 @end

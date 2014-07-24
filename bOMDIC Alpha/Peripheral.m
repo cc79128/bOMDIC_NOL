@@ -419,13 +419,13 @@ NSString * fName; //Fw file name for OTA
             
             // timer for ECG Analysis & ECG Display Check
             _EAEDtenMsTicks = 200;
-            /*
+            
             _EAEDCheckTimer = [NSTimer scheduledTimerWithTimeInterval:0.01
                                                                target:self
                                                              selector:@selector(EAEDCheck)
                                                              userInfo:nil
                                                               repeats:YES];
-            */
+            
             _isECGAnalysisOpen = 0;
             _isECGDisplayOpen = 0;
             
@@ -557,8 +557,8 @@ NSString * fName; //Fw file name for OTA
             _levelOfStamina = (NSInteger) level;
             
             if (length>=3){
-                _ecgZoom = (unsigned int)byte[2];
-                
+                //_ecgZoom = (unsigned int)byte[2];
+                _rxEcgZoom = (unsigned int)byte[2];
                 for (int i=0; i<length; i++) {
                     //NSLog(@"i:%d, stamina = %x, length=%d",i,byte[i],length);
                     NSString *rowdata = [NSString stringWithFormat:@"i:%d, rowdata:%x, length=%d",i,byte[i],length];
@@ -715,6 +715,7 @@ NSString * fName; //Fw file name for OTA
                         
                         _isCompleteOneSecECG = 1;
                         
+                        _ecgZoom = _rxEcgZoom;
                         //NSLog(@"RawData = %@",_ECGRawData);
                         
                         

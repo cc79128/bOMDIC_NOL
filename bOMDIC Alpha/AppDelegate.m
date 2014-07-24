@@ -10,7 +10,7 @@
 #import "Peripheral.h"
 
 @implementation AppDelegate
-@synthesize window, tabBarController, waveViewController, fwUpdateViewController, infoViewController;
+@synthesize window, tabBarController, waveViewController, fwUpdateViewController, infoViewController, liveMonitorVC;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -21,16 +21,19 @@
     self.waveViewController = [[WaveViewController alloc] initWithNibName:nil bundle:nil];
     self.fwUpdateViewController = [[FwUpdateViewController alloc] initWithNibName:nil bundle:nil];
     self.infoViewController = [[InfoViewController alloc] initWithNibName:nil bundle:nil];
+    self.liveMonitorVC = [[LiveMonitorVC alloc] initWithNibName:@"LiveMonitor" bundle:nil];
     // a nib name of nil (meaning to use the .xib file we created for each controller), and a bundle of nil (meaning to use this application’s bundle)
     
     
     // set the titles for the view controllers:
-    self.waveViewController.title = @"Wave";
+    //self.waveViewController.title = @"Wave";
+    self.liveMonitorVC.title = @"Wave";
     self.fwUpdateViewController.title = @"Update";
     self.infoViewController.title = @"Info";
     
     // set the images to appear in the tab bar:
-    self.waveViewController.tabBarItem.image = [UIImage imageNamed:@"iconHeart.png"];
+    //self.waveViewController.tabBarItem.image = [UIImage imageNamed:@"iconHeart.png"];
+    self.liveMonitorVC.tabBarItem.image = [UIImage imageNamed:@"iconHeart.png"];
     self.fwUpdateViewController.tabBarItem.image = [UIImage imageNamed:@"iconFwUpdate.png"];
     self.infoViewController.tabBarItem.image = [UIImage imageNamed:@"iconInfo.png"];
     
@@ -39,7 +42,8 @@
     
     // set the tab bar’s view controllers array:
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
-                                             self.waveViewController,
+                                             //self.waveViewController,
+                                             self.liveMonitorVC,
                                              self.fwUpdateViewController,
                                              self.infoViewController,
                                              nil];

@@ -31,6 +31,11 @@
 		D2F5EA40197F94F7005E94B9 /* DiscoveringCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA3E197F94F7005E94B9 /* DiscoveringCell.xib */; };
 		D2F5EA44197F95FB005E94B9 /* PeripheralCell.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA42197F95FB005E94B9 /* PeripheralCell.m */; };
 		D2F5EA45197F95FB005E94B9 /* PeripheralCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA43197F95FB005E94B9 /* PeripheralCell.xib */; };
+		D2F5EA4D1980E63F005E94B9 /* Helper.mm in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA481980E63F005E94B9 /* Helper.mm */; };
+		D2F5EA4E1980E63F005E94B9 /* LeadPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA4A1980E63F005E94B9 /* LeadPlayer.m */; };
+		D2F5EA4F1980E63F005E94B9 /* LiveMonitor.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2F5EA4B1980E63F005E94B9 /* LiveMonitor.xib */; };
+		D2F5EA531980E6CC005E94B9 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA521980E6CC005E94B9 /* NSData+Base64.m */; };
+		D2F5EA551980EB73005E94B9 /* LiveMonitorVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D2F5EA541980EB73005E94B9 /* LiveMonitorVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +84,15 @@
 		D2F5EA41197F95FB005E94B9 /* PeripheralCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PeripheralCell.h; sourceTree = "<group>"; };
 		D2F5EA42197F95FB005E94B9 /* PeripheralCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PeripheralCell.m; sourceTree = "<group>"; };
 		D2F5EA43197F95FB005E94B9 /* PeripheralCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PeripheralCell.xib; sourceTree = "<group>"; };
+		D2F5EA471980E63F005E94B9 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		D2F5EA481980E63F005E94B9 /* Helper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Helper.mm; sourceTree = "<group>"; };
+		D2F5EA491980E63F005E94B9 /* LeadPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeadPlayer.h; sourceTree = "<group>"; };
+		D2F5EA4A1980E63F005E94B9 /* LeadPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeadPlayer.m; sourceTree = "<group>"; };
+		D2F5EA4B1980E63F005E94B9 /* LiveMonitor.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveMonitor.xib; sourceTree = "<group>"; };
+		D2F5EA4C1980E63F005E94B9 /* LiveMonitorVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveMonitorVC.h; sourceTree = "<group>"; };
+		D2F5EA511980E6CC005E94B9 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		D2F5EA521980E6CC005E94B9 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		D2F5EA541980EB73005E94B9 /* LiveMonitorVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveMonitorVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +152,8 @@
 		D2F5E9FC197E5928005E94B9 /* bOMDIC Alpha */ = {
 			isa = PBXGroup;
 			children = (
+				D2F5EA501980E685005E94B9 /* base64 */,
+				D2F5EA461980E5F6005E94B9 /* ECGWaves */,
 				D2F5EA38197F448A005E94B9 /* CustomAlertView */,
 				D2F5EA34197F4363005E94B9 /* Peripheral */,
 				D2F5EA05197E5928005E94B9 /* AppDelegate.h */,
@@ -208,6 +224,29 @@
 				D2F5EA3A197F459E005E94B9 /* CustomIOS7AlertView.m */,
 			);
 			name = CustomAlertView;
+			sourceTree = "<group>";
+		};
+		D2F5EA461980E5F6005E94B9 /* ECGWaves */ = {
+			isa = PBXGroup;
+			children = (
+				D2F5EA471980E63F005E94B9 /* Helper.h */,
+				D2F5EA481980E63F005E94B9 /* Helper.mm */,
+				D2F5EA491980E63F005E94B9 /* LeadPlayer.h */,
+				D2F5EA4A1980E63F005E94B9 /* LeadPlayer.m */,
+				D2F5EA4C1980E63F005E94B9 /* LiveMonitorVC.h */,
+				D2F5EA541980EB73005E94B9 /* LiveMonitorVC.m */,
+				D2F5EA4B1980E63F005E94B9 /* LiveMonitor.xib */,
+			);
+			name = ECGWaves;
+			sourceTree = "<group>";
+		};
+		D2F5EA501980E685005E94B9 /* base64 */ = {
+			isa = PBXGroup;
+			children = (
+				D2F5EA511980E6CC005E94B9 /* NSData+Base64.h */,
+				D2F5EA521980E6CC005E94B9 /* NSData+Base64.m */,
+			);
+			name = base64;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -285,6 +324,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2F5EA4F1980E63F005E94B9 /* LiveMonitor.xib in Resources */,
 				D2F5EA01197E5928005E94B9 /* InfoPlist.strings in Resources */,
 				D2F5EA40197F94F7005E94B9 /* DiscoveringCell.xib in Resources */,
 				D2F5EA29197E5971005E94B9 /* WaveViewController.xib in Resources */,
@@ -315,8 +355,12 @@
 				D2F5EA07197E5928005E94B9 /* AppDelegate.m in Sources */,
 				D2F5EA2D197E59BE005E94B9 /* FwUpdateViewController.m in Sources */,
 				D2F5EA44197F95FB005E94B9 /* PeripheralCell.m in Sources */,
+				D2F5EA531980E6CC005E94B9 /* NSData+Base64.m in Sources */,
 				D2F5EA32197E81F8005E94B9 /* InfoViewController.m in Sources */,
 				D2F5EA03197E5928005E94B9 /* main.m in Sources */,
+				D2F5EA4D1980E63F005E94B9 /* Helper.mm in Sources */,
+				D2F5EA4E1980E63F005E94B9 /* LeadPlayer.m in Sources */,
+				D2F5EA551980EB73005E94B9 /* LiveMonitorVC.m in Sources */,
 				D2F5EA3B197F459E005E94B9 /* CustomIOS7AlertView.m in Sources */,
 				D2F5EA37197F4418005E94B9 /* Peripheral.m in Sources */,
 			);
