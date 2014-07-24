@@ -138,9 +138,6 @@ int pointPerDraw = 500.0f * 0.04f;
 
 - (void)fireDrawing
 {
-    //float uVpb = 0.9;
-    //float pixelPerUV = 5 * 10.0 / 1000;
-    //float pixelPerUV = 5 * 10.0 / 100;//GoMore
     
 	int pointCount = pointPerDraw;
 	CGFloat pointPixel = pixelPerPoint;
@@ -162,14 +159,6 @@ int pointPerDraw = 500.0f * 0.04f;
 				i+=3; pointCount+=3; count+=3;
 			}//drawingPoint overlap
             
-			//Z = 1 / unit: 0.0930 mV
-            /*
-			int currentValue = [[self.pointsArray objectAtIndex:currentPoint] intValue];
-            
-            CGFloat value = full_height/2 - [[self.pointsArray objectAtIndex:currentPoint] intValue] * uVpb * pixelPerUV;//calculate Y pixel position
-            */
-            
-            //CGFloat ecgAmp = full_height/2 - ([[self.pointsArray objectAtIndex:currentPoint] floatValue]-128.0) * 10.05*4.0/(1.0/0.0930);//calculate Y pixel position
             CGFloat ecgAmp = full_height/2 - ([[self.pointsArray objectAtIndex:currentPoint] floatValue]/16.0-128.0) * 10.05*4.0/(2.0/0.0930);//calculate Y pixel position
 
 			drawingPoints[i] = CGPointMake(pos_x, ecgAmp);

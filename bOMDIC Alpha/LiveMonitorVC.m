@@ -27,21 +27,6 @@ float pixelPerUV = 5 * 10.0 / 1000;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    labelBat.text = @"";
-    labelMsg.text = @"";
-    //[self addViews];
-    //[self initialMonitor];
-    //[self startTimer_getHeartRate]; // add by jeff
-    
-    /*
-    if (![[Peripheral sharedPeripheral] isECGDisplayOpen]) {
-        [[Peripheral sharedPeripheral] toggleECGDisplay];
-    }
-    if (![[Peripheral sharedPeripheral] isECGAnalysisOpen]) {
-    [[Peripheral sharedPeripheral] toggleECGAnalysis];
-    }
-     */
-    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -200,25 +185,10 @@ float pixelPerUV = 5 * 10.0 / 1000;
 
 - (void)popDemoDataAndPushToLeads
 {
-	/* original code
-     int length = 440;
-     short **data = [Helper getDemoData:length];
-     
-     NSArray *data12Arrays = [self convertDemoData:data dataLength:length doWilsonConvert:NO];
-     
-     for (int i=0; i<leadCount; i++)
-     {
-     NSArray *data = [data12Arrays objectAtIndex:i];
-     [self pushPoints:data data12Index:i];
-     }
-     */
-    
     
 	for (int i=0; i<leadCount; i++)
 	{
-		
-        //jeff
-        
+		      
         NSString *convertedString = [[NSString alloc] initWithData:[[Peripheral sharedPeripheral] ECGRawData] encoding:NSUTF8StringEncoding];
         NSData *base64Data = [ [NSData alloc] initWithBase64EncodedString:convertedString options:0];
         
@@ -258,8 +228,6 @@ float pixelPerUV = 5 * 10.0 / 1000;
         [lead.pointsArray addObjectsFromArray:_pointsArray];
     }
     
-    //Dai_Log(@"Points in Queue:%d",(lead.pointsArray.count - lead.currentPoint));
-	
     if (data12Index==0)
 	{
 		countOfPointsInQueue = lead.pointsArray.count;
@@ -295,8 +263,6 @@ float pixelPerUV = 5 * 10.0 / 1000;
 - (void)drawRealTime
 {
 	LeadPlayer *l = [self.leads objectAtIndex:0];
-	NSInteger zoomChk = [[Peripheral sharedPeripheral] ecgZoom];
-    
     
     if (![[Peripheral sharedPeripheral] signalQuality]){
         l.curveColor = @"gray";
@@ -317,17 +283,6 @@ float pixelPerUV = 5 * 10.0 / 1000;
 		}
 	}
     else{
-        /*
-        for (LeadPlayer *lead in self.leads)
-		{
-			[lead.pointsArray removeAllObjects];
-            lead.currentPoint = 0;
-		}
-        */
-        /*
-        [self.leads removeAllObjects];
-        [self addViews];
-        */
         
         [l.pointsArray removeObjectsInRange:NSMakeRange(0, l.pointsArray.count)];
         l.currentPoint = 0;

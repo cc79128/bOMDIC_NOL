@@ -37,20 +37,6 @@
 }
 
 - (IBAction)testAction:(id)sender {
-    
-    // disconnect & rescan
-    [[Peripheral sharedPeripheral] disconnectFromPheriphral];
-    [[Peripheral sharedPeripheral] discoverPheriphral:^(BOOL isConnect) {
-        
-        if (isConnect) {
-            NSLog(@"Connect to Device, HR = %@",[ [Peripheral sharedPeripheral] heartRate]);
-        }
-        else{
-            NSLog(@" Connect to Device Fail!!!!");
-        }
-        
-        
-    }];
 
 }
 @end
