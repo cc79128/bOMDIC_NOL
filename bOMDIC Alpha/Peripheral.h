@@ -28,15 +28,15 @@
 -(void) discoverPheriphral : (void (^)(BOOL isConnect)) completion;
 -(void) disconnectFromPheriphral;
 //-(void) reconnectToPheriphral;
--(void) manualReconnectToPheriphral;
+//-(void) manualReconnectToPheriphral;
 -(void) resetStamina;
 -(void) resetEnergy;
 -(void) toggleECGDisplay;
 -(void) toggleECGAnalysis;
--(NSString *) saveRecordToFile;
+//-(NSString *) saveRecordToFile;
 -(void) setDatatoDevice:(NSMutableString *)mutString withNSData:(NSData *)loadNSData;
 -(void) setOTAUpdatetoDevice;
--(void) staminaTest;
+//-(void) staminaTest;
 -(void) updateUserSetting;
 
 // test command
@@ -61,6 +61,9 @@
 @property (readonly, nonatomic) NSInteger isECGDisplayOpen;
 @property (readonly, nonatomic) BOOL signalQuality;
 @property (readonly, nonatomic) NSInteger ecgZoom;
+@property NSInteger EAEDtenMsTicks;
+@property (nonatomic) NSTimer  *EAEDCheckTimer;
+@property (readonly, nonatomic) NSInteger levelOfStamina;
 
 
 //for OTA flags

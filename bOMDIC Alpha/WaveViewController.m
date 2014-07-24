@@ -38,7 +38,8 @@
 
 - (IBAction)testAction:(id)sender {
     
-    // 連接裝置
+    // disconnect & rescan
+    [[Peripheral sharedPeripheral] disconnectFromPheriphral];
     [[Peripheral sharedPeripheral] discoverPheriphral:^(BOOL isConnect) {
         
         if (isConnect) {
