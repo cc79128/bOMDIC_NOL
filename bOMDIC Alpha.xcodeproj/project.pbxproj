@@ -483,7 +483,7 @@
 				GCC_PREFIX_HEADER = "bOMDIC Alpha/bOMDIC Alpha-Prefix.pch";
 				INFOPLIST_FILE = "bOMDIC Alpha/bOMDIC Alpha-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "123D74A4-B87B-40CF-8AE1-8682AD96E16A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -497,7 +497,7 @@
 				GCC_PREFIX_HEADER = "bOMDIC Alpha/bOMDIC Alpha-Prefix.pch";
 				INFOPLIST_FILE = "bOMDIC Alpha/bOMDIC Alpha-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "123D74A4-B87B-40CF-8AE1-8682AD96E16A";
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

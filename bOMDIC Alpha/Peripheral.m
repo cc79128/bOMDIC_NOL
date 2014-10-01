@@ -8,6 +8,8 @@
 
 #import "Peripheral.h"
 
+#define AString(A,B)    [(A) stringByAppendingString:(B)] //字串相加
+
 @interface Peripheral (Private)
 -(UIView*) createMatchListTable;
 -(void) showMatchList;
@@ -22,6 +24,17 @@
 -(CustomIOS7AlertView*) getRuntimeAlertView;
 -(void) EAEDCheck;
 -(void) updatePeripheralScan;
+
+// HsinHsi 寫入csv檔 聲明方法
+- (void)makeCSV;
+- (void)createFile:(NSString *)fileName;
+- (void)exportCSV:(NSString *)fileName:(NSString*)data;
+
+
+//將elapsed time轉成時分秒制
+- (NSString*)elapsedtotime:(double)elapse;
+
+
 @end
 
 @interface Peripheral ()
@@ -29,6 +42,7 @@
 @end
 
 @implementation Peripheral {
+    
     CBCentralManager *myCentralManager;
     NSMutableDictionary *characteristicDic;
     int currentHeaderIndex;
@@ -53,6 +67,10 @@ static const char RUNTIMEMATCHLISTTABLEVIEWPOINTER;
 static const char RUNTIMEMALERTVIEWPOINTER;
 static const char DISCOVERCOMPLETIONPOINTER;
 NSString * fName; //Fw file name for OTA
+NSString *filePath_global; //HsinHsi 存csv檔路徑
+
+double elapsed_time = 0 ; //開始記錄後經過多少時間
+bool header_flag = 0; //判斷是否為第一次寫入檔案
 
 #pragma mark - shared function
 
@@ -70,6 +88,12 @@ NSString * fName; //Fw file name for OTA
 
 - (id)init {
     if (self = [super init]) {
+        
+        //HsinHsi Initial
+        NSLog(@"HsinHsi: Initial");
+        [self makeCSV];
+        
+        
         _isConnectedToPeriphral = NO;
         
         //iOS7 only
@@ -143,10 +167,10 @@ NSString * fName; //Fw file name for OTA
 }
 
 /*
--(void) manualReconnectToPheriphral {
-    [self connectToPeripheral:self.myPeripheral];
-}
-*/
+ -(void) manualReconnectToPheriphral {
+ [self connectToPeripheral:self.myPeripheral];
+ }
+ */
 
 -(void) setRuntimeMatchListTableView : (UITableView*) tableview {
     objc_setAssociatedObject(self, &RUNTIMEMATCHLISTTABLEVIEWPOINTER, tableview, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -201,7 +225,7 @@ NSString * fName; //Fw file name for OTA
 }
 
 -(void) updatePeripheralScan {
-
+    
     [myCentralManager stopScan];
     
     NSMutableArray *tempMatchListArray = [[NSMutableArray alloc] init];
@@ -230,7 +254,7 @@ NSString * fName; //Fw file name for OTA
     [myCentralManager scanForPeripheralsWithServices:@[[CBUUID UUIDWithString:@"180d"]] options:options];
     
     [[self getRuntimeMatchListTableView] reloadData];
-
+    
 }
 
 #pragma mark - UITableViewDataSource
@@ -280,7 +304,7 @@ NSString * fName; //Fw file name for OTA
     NSLog(@"%s : %d",__FUNCTION__, central.state);
     switch (central.state) {
         case CBCentralManagerStatePoweredOn:
-            NSLog(@"Power ON!");
+            NSLog(@"Power ON!"); //開啟程式
             //[self discoverPheriphral];
             
             break;
@@ -317,7 +341,7 @@ NSString * fName; //Fw file name for OTA
         } else {
             // update existing periphreal & reset lifetime
             [matchListArray replaceObjectAtIndex:foundIndex
-                                          withObject:@{@"peripheral": peripheral, @"advertisementData": advertisementData, @"RSSI": RSSI, @"lifetime": [NSNumber numberWithInteger:1]}];
+                                      withObject:@{@"peripheral": peripheral, @"advertisementData": advertisementData, @"RSSI": RSSI, @"lifetime": [NSNumber numberWithInteger:1]}];
         }
         
         
@@ -337,12 +361,12 @@ NSString * fName; //Fw file name for OTA
     NSLog(@"Connected!");
     
     
-     [heartrateRecordArray removeAllObjects];
-     [staminaRecordArray removeAllObjects];
-     [staminaRowDataRecordArray removeAllObjects];
-     [ECGOutputRecordArray removeAllObjects];
-     [ECGRowDataRecordArray removeAllObjects];
-     
+    [heartrateRecordArray removeAllObjects];
+    [staminaRecordArray removeAllObjects];
+    [staminaRowDataRecordArray removeAllObjects];
+    [ECGOutputRecordArray removeAllObjects];
+    [ECGRowDataRecordArray removeAllObjects];
+    
     
     //把 ID 記起來
     [ [NSUserDefaults standardUserDefaults] setObject:[peripheral.identifier UUIDString] forKey:@"ConnectedPeriphral"];
@@ -723,13 +747,52 @@ NSString * fName; //Fw file name for OTA
                         NSData *base64Data = [ [NSData alloc] initWithBase64EncodedString:convertedString options:0];
                         const unsigned char *byte64 = [base64Data bytes];
                         //NSLog(@"base64Data = %@, length=%d",base64Data,base64Data.length);
+                        
+                        
+                        NSString *ECGData = @"";
+                        //迴圈每秒跑255次
                         for (int i =0; i<base64Data.length; i++) {
                             //NSLog(@"byte %d : %d",i,byte64[i]);
                             NSString *ECGToFile = [NSString stringWithFormat:@"index:%d, data:%d",i,byte64[i]];
                             [ECGOutputRecordArray addObject:ECGToFile];
+                            
+                            //只拿ECG Data
+                            NSString *Data = [NSString stringWithFormat:@"%d",byte64[i]];
+                            //NSString *Elapsed = [NSString stringWithFormat:@"%f",elapsed_time];
+                            
+                            //Elapsed time轉為時間格式
+                            NSString *Timer =[self elapsedtotime:elapsed_time];
+                            //NSLog(@"Timer: %@",Timer);
+                            
+                            //ECGData = [ECGData stringByAppendingString:Timer];
+                            ECGData = [ECGData stringByAppendingString:@"'"];
+                            ECGData = [ECGData stringByAppendingString:Timer];
+                            ECGData = [ECGData stringByAppendingString:@"'"];
+                            ECGData = [ECGData stringByAppendingString:@","];
+                            ECGData = [ECGData stringByAppendingString:Data];
+                            ECGData = [ECGData stringByAppendingString:@"\n"];
+                            
+                            elapsed_time += 0.00392156862745;
+                            //NSLog(@"%f",elapsed_time);
+                            //NSLog(@"elapsed_time: %f",elapsed_time);
+                            //NSLog(@"ECGData: %@",ECGData);
+                            //寫入CSV檔
+                            //[self exportCSV:filePath_global:ECGData];
+                            
+                            //HsinHsi
+                             //NSLog(@"stamina data:%d, length=%d, quality=%d, ecgZoom=%d, oneECG=%d, Kcal=%@",byte[5],length,_signalQuality,_ecgZoom,_isCompleteOneSecECG, _calories);
+                            //unsigned char uHR = byte[1];
+                            //NSString *HRStr = [NSString stringWithFormat:@"%d",uHR];
+                            //NSLog(@"Heart Rate is, %@", HRStr);
+                            //NSLog(@"HsinHsi: Heart Rate=%@, quality=%d, kcal=%@", HRStr, _signalQuality, _calories);
+                            //NSString * timestamp = [NSString stringWithFormat:@"%f",[[NSDate date] timeIntervalSince1970] * 1000];
+                            //NSLog(@"(HsinHsi) time:%@ index:%d, data:%d",timestamp,i,byte64[i]); //印出index data
+                            
                         }
-                        
-                        
+                        //寫入CSV檔
+                        //NSLog(@"ECGData: %@",ECGData);
+                        [self exportCSV:filePath_global:ECGData];
+                        ECGData = @"";
                         
                         //NSLog(@"decode data = %@, length=%d",convertedString,convertedString.length);
                         
@@ -796,6 +859,7 @@ NSString * fName; //Fw file name for OTA
 }
 
 #pragma mark - Sensor Data Processing
+
 
 -(void) EAEDCheck {
     
@@ -895,7 +959,7 @@ NSString * fName; //Fw file name for OTA
         
         progressOTA = (NSUInteger)((float)writeAddr / (float)(_finalOTAAddr - 0xF) *100 );
         NSLog(@"progressOTA is:%d%%",progressOTA);
-
+        
         
         //reset flagSensorRequestOneFWSegment
         self.flagSensorRequestOneFWSegment = FALSE;
@@ -1030,5 +1094,102 @@ NSString * fName; //Fw file name for OTA
     [self setDatatoDevice:mutString withNSData:segFWData];
 }
 
+
+//HsinHsi 寫入CSV檔
+
+- (void)makeCSV{
+    
+    //HsinHsi 獲得現在系統時間
+    NSDate *now = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"MM-d hh:mm:ss";
+    [dateFormatter setTimeZone:[NSTimeZone systemTimeZone]];
+    //NSLog(@"The Current Time is %@",[dateFormatter stringFromDate:now]);
+    
+    NSArray *documents = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDirectory, YES);
+    NSString *documentDir = [documents objectAtIndex:0];
+    NSString *filePath = [documentDir stringByAppendingPathComponent:[dateFormatter stringFromDate:now]];
+    filePath = [filePath stringByAppendingString:@" ECG.csv"];
+    
+    filePath_global = filePath; //將路徑存起來
+    
+    //NSLog(@"filePath = %@", filePath);
+    NSLog(@"(HsinHsi) 創建CSV檔");
+    
+    [self createFile:filePath];
+    //[self exportCSV:filePath];
+   
+}
+
+
+//私有方法:
+- (void)createFile:(NSString *)fileName {
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:fileName error:nil];
+    
+    
+    if (![fileManager createFileAtPath:fileName contents:nil attributes:nil]) {
+        NSLog(@"不能创建文件");
+    }
+    
+}
+
+
+- (void)exportCSV:(NSString *)fileName:(NSString*)data {
+    
+    NSOutputStream *output = [[NSOutputStream alloc] initToFileAtPath:fileName append:YES];
+    [output open];
+    
+    if (![output hasSpaceAvailable]) {
+        NSLog(@"沒有足夠可用空間");
+    } else {
+        
+        //寫header
+        
+        if(header_flag==0){
+            NSString *header = @"'Elapsed time','MLII'\n'hh:mm:ss.mmm','mV'\n";
+            const uint8_t *headerString = (const uint8_t *)[header cStringUsingEncoding:NSUTF8StringEncoding];
+            NSInteger headerLength = [header lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+            NSInteger result_header = [output write:headerString maxLength:headerLength];
+            if (result_header <= 0) {
+            NSLog(@"header寫入錯誤");
+            }
+            header_flag =1;
+        }
+        
+        //NSString *row = AString(data, @"\n");
+        NSString *row = data;
+        const uint8_t *rowString = (const uint8_t *)[row cStringUsingEncoding:NSUTF8StringEncoding];
+        NSInteger rowLength = [row lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+        NSInteger result = [output write:rowString maxLength:rowLength];
+        if (result <= 0) {
+            NSLog(@"寫入錯誤");
+        }
+        
+        [output close];
+    }
+}
+
+//將elapsed time轉成時分秒制
+- (NSString*)elapsedtotime:(double)elapsed{
+    int hh; //小時 一小時3600秒
+    int mm; //分鐘 一分鐘60秒
+    int ss; //秒
+    int _mmm; //毫秒 msec = (time - sec)*100; //毫秒
+    hh = 0;
+    mm =0;
+    ss = 0;
+    _mmm = 0;
+    
+    hh = elapsed/3600;
+    mm = elapsed/60;
+    ss = (int)elapsed%60;
+    _mmm = (elapsed- ((int)elapsed_time))*1000;
+    
+    NSString *timer = [NSString stringWithFormat:@"%02d:%02d:%02d.%03d",hh,mm,ss,_mmm];
+    
+    return timer;
+}
 
 @end
